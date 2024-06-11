@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمات المركبة</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
+        body {
+            font-family: "IBM Plex Sans Arabic", sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        label,
+        select,
+        input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        
+        select,
+        input {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: "IBM Plex Sans Arabic", sans-serif;
+            background-color: #f5f5f5;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        
+        select:focus,
+        input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        
+        option {
+            padding: 10px;
+            font-size: 16px;
+        }
+        
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        #buu {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #db1616;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .record {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+        
+        .record p {
+            margin: 5px 0;
+        }
+        
+        .record hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 10px 0;
+        }
+        
+        .record-header {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+        
+        #passwordContainer {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 200px auto;
+        }
+        
+        #passwordContainer h2 {
+            color: #0f0f0f;
+            margin-bottom: 20px;
+        }
+        
+        #passwordInput {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: "IBM Plex Sans Arabic", sans-serif;
+            background-color: #f5f5f5;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        #passwordInput:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        
+        #passwordButton {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #ffffff;
+            font-family: "IBM Plex Sans Arabic", sans-serif;
+            background-color: #4CAF50;
+            font-size: 16px;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        
+        #passwordButton:hover {
+            background-color: #3d8a40;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="passwordContainer" style="display: block; text-align: center;">
+        <h2>الرجاء إدخال كلمة المرور للوصول إلى النظام</h2>
+        <input type="password" id="passwordInput">
+        <div id="passwordButton" onclick="checkPassword()">دخول</div>
+    </div>
+    <div id="contentContainer" style="display: none;">
+        <h1>تسجيل خدمات المركبة</h1>
+        <form id="serviceForm">
+            <label for="carName">اسم المركبة:</label>
+            <select id="carName" name="carName" required>
+            <option value="">اختر اسم المركبة</option>
+            <option value="تويوتا رش">تويوتا رش</option>
+            <option value="شفرليه كابتيفا">شفرليه كابتيفا</option>
+        </select>
+
+            <label for="serviceType">نوع الخدمة:</label>
+            <select id="serviceType" name="serviceType" required onchange="toggleCustomServiceType()">
+            <option value="">اختر نوع الخدمة</option>
+            <option value="تغيير زيت">تغيير زيت</option>
+            <option value="فلتر + تغيير زيت">فلتر + تغيير زيت</option>
+            <option value="آخر">آخر</option> 
+        </select>
+
+
+            <div id="customServiceTypeContainer" style="display: none;">
+                <label for="customServiceType">نوع الخدمة المخصص:</label>
+                <input type="text" id="customServiceType" name="customServiceType">
+            </div>
+
+            <label for="servicePrice">سعر الخدمة:</label>
+            <input type="number" id="servicePrice" name="servicePrice" required>
+
+            <button type="submit">تسجيل</button>
+        </form>
+
+        <div id="recordsContainer"></div>
+    </div>
+
+    <script>
+        const correctPassword = "1489";
+
+        function checkPassword() {
+            const enteredPassword = document.getElementById("passwordInput").value;
+            if (enteredPassword === correctPassword) {
+                document.getElementById("passwordContainer").style.display = "none";
+                document.getElementById("contentContainer").style.display = "block";
+                localStorage.setItem('invoiceDate', new Date().getTime());
+
+            } else {
+                alert("كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.");
+            }
+        }
+
+        function toggleCustomServiceType() {
+            const serviceType = document.getElementById('serviceType').value;
+            const customServiceTypeContainer = document.getElementById('customServiceTypeContainer');
+            if (serviceType === 'آخر') {
+                customServiceTypeContainer.style.display = 'block';
+            } else {
+                customServiceTypeContainer.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedRecords = JSON.parse(localStorage.getItem('serviceRecords')) || [];
+            const recordsContainer = document.getElementById('recordsContainer');
+
+            savedRecords.forEach(function(recordData, index) {
+                const record = createRecordElement(recordData, index);
+                recordsContainer.appendChild(record);
+            });
+
+            document.getElementById('serviceForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const carName = document.getElementById('carName').value;
+                let serviceType = document.getElementById('serviceType').value;
+                const customServiceType = document.getElementById('customServiceType').value;
+                const servicePrice = document.getElementById('servicePrice').value;
+                const currentDate = new Date().toLocaleDateString('ar-SA');
+
+                if (customServiceType.trim() !== '') {
+                    serviceType = customServiceType;
+                }
+
+                const recordData = {
+                    carName: carName,
+                    serviceType: serviceType,
+                    servicePrice: servicePrice,
+                    currentDate: currentDate
+                };
+
+                savedRecords.push(recordData);
+                localStorage.setItem('serviceRecords', JSON.stringify(savedRecords));
+
+                const record = createRecordElement(recordData, savedRecords.length - 1);
+                recordsContainer.appendChild(record);
+
+                document.getElementById('serviceForm').reset();
+            });
+
+            function createRecordElement(recordData, index) {
+                const record = document.createElement('div');
+                record.className = 'record';
+
+                const invoiceDate = new Date(parseInt(localStorage.getItem('invoiceDate'))); // Fix here
+                const nextMaintenanceDate = new Date(invoiceDate);
+
+                nextMaintenanceDate.setMonth(nextMaintenanceDate.getMonth() + 1);
+
+                record.innerHTML = `
+            <div class="record-header">فاتورة خدمة المركبة</div>
+            <p><strong>اسم المركبة:</strong> ${recordData.carName}</p>
+            <p><strong>نوع الخدمة:</strong> ${recordData.serviceType}</p>
+            <p><strong>سعر الخدمة:</strong> ${recordData.servicePrice} ريال</p>
+            <hr>
+            <p><strong>تاريخ التسجيل:</strong> ${recordData.currentDate}</p>
+            <p><strong>تاريخ الصيانة القادمة:</strong> ${nextMaintenanceDate.toLocaleDateString('ar-SA')}</p>
+            <button id="buu" onclick="deleteRecord(${index})">حذف الفاتورة</button>
+            <footer style="text-align: center; margin-top: 20px;">
+                <p>جميع الحقوق محفوظة © 2024. بواسطة عبدالمجيد ممدوح الضلعان</p>
+            </footer>
+        `;
+                return record;
+            }
+
+            window.deleteRecord = function(index) {
+                if (confirm('هل أنت متأكد أنك تريد حذف هذه الفاتورة؟')) {
+                    savedRecords.splice(index, 1);
+                    localStorage.setItem('serviceRecords', JSON.stringify(savedRecords));
+                    location.reload();
+                }
+            };
+        });
+    </script>
+
+</body>
+
+</html>
